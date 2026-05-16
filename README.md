@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # 🏥 Clínica Gestão — Sistema de Gestão de Clínica Multidisciplinar
 
 Sistema desenvolvido em Java para digitalizar os processos de uma clínica multidisciplinar, incluindo cadastro de pacientes e profissionais, agendamentos, faturamento e relatórios analíticos.
@@ -124,3 +125,7 @@ mvn test
 
 Projeto desenvolvido para a disciplina de **Programação Orientada a Objetos**.
 Data de apresentação: **29/05/2026**
+=======
+# clinica-gestao
+um projeto feito em java para a materia de programação orientada a objetos
+>>>>>>> b4f4e0e4b7325d8bce733597bb9bd719589c6baa
