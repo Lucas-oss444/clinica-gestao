@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # 🏥 Clínica Gestão — Sistema de Gestão de Clínica Multidisciplinar
 
 Sistema desenvolvido em Java para digitalizar os processos de uma clínica multidisciplinar, incluindo cadastro de pacientes e profissionais, agendamentos, faturamento e relatórios analíticos.
@@ -83,7 +82,7 @@ clinica-gestao/
 ### Clonando o repositório
 
 ```bash
-git clone https://github.com/seuusuario/clinica-gestao.git
+git clone https://github.com/Lucas-oss444/clinica-gestao.git
 cd clinica-gestao
 ```
 
@@ -114,10 +113,10 @@ mvn test
 
 | Nome | GitHub |
 |---|---|
-| Nome 1 | [@usuario1](https://github.com/usuario1) |
-| Nome 2 | [@usuario2](https://github.com/usuario2) |
-| Nome 3 | [@usuario3](https://github.com/usuario3) |
-| Nome 4 | [@usuario4](https://github.com/usuario4) |
+| Lucas   | [@Lucas-oss444](https://github.com/Lucas-oss444) |
+| Gustavo | [@Galencar14](https://github.com/Galencar14)     |
+| Nome 3  | [@usuario3](https://github.com/usuario3)          |
+| Nome 4  | [@usuario4](https://github.com/usuario4)          |
 
 ---
 
@@ -125,7 +124,3 @@ mvn test
 
 Projeto desenvolvido para a disciplina de **Programação Orientada a Objetos**.
 Data de apresentação: **29/05/2026**
-=======
-# clinica-gestao
-um projeto feito em java para a materia de programação orientada a objetos
->>>>>>> b4f4e0e4b7325d8bce733597bb9bd719589c6baa
