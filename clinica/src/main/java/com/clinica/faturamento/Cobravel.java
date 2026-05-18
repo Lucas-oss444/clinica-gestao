@@ -8,6 +8,4 @@ public interface Cobravel {
     double calcularValor();
     String gerarRecibo();
     
-
-
 }

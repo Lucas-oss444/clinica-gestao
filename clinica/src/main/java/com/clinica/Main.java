@@ -4,9 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.clinica.agendamento.Consulta;
+import com.clinica.agendamento.FilaEspera;
 import com.clinica.model.Paciente;
 import com.clinica.model.Profissional;
 import com.clinica.model.Sala;
+import com.clinica.agendamento.Procedimento;
+import com.clinica.faturamento.Recibo;
 
 public class Main {
     public static void main(String[] args) {
@@ -58,8 +61,26 @@ public class Main {
         System.out.println(consulta.gerarRecibo());
         System.out.println("Valor: R$ " + consulta.calcularValor());
 
+        // Testando Procedimento
+        Procedimento procedimento = new Procedimento("29/05/2026", "10:00", pacientes.get(1), profissionais.get(1), salas.get(1), "Raio-X", 150.0);
 
+        System.out.println("\n" + procedimento.gerarRecibo());
+        System.out.println("Valor: R$ " + procedimento.calcularValor());
 
+        // Testando FilaEspera
+    FilaEspera filaEspera = new FilaEspera();
+
+    filaEspera.adicionarPaciente(pacientes.get(1)); // Savio (não prioritário)
+    filaEspera.adicionarPaciente(pacientes.get(0)); // Silvio (prioritário)
+
+    filaEspera.exibirFila();
+
+    filaEspera.chamarProximo();
+
+    filaEspera.exibirFila();
+
+    Recibo recibo = new Recibo(consulta, consulta.calcularValor(), "29/05/2026");
+recibo.emitirRecibo();
 
 
 
