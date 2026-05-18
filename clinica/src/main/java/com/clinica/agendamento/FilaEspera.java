@@ -43,12 +43,12 @@ public class FilaEspera {
             return;//verifica se a fila de espera esta vazia
         }else {
         System.out.println("FILA DE ESPERA");
-        for(int i = 0; i < fila.size(); i++){
-            Paciente p = fila.get(i);
-            String prioridade = p.isPrioridade() ? " [PRIORITÁRIO]" : "[NÃO PRIORITARIO]";//verificando se o paciente é prioritario com "?" servindo como uma versão mais simples de "if"
-            System.out.println((i + 1) + ". " + p.getNome() + prioridade);//printando numero da fila e se é prioritario
+            for(int i = 0; i < fila.size(); i++){
+                Paciente p = fila.get(i);
+                String prioridade = p.isPrioridade() ? " [PRIORITÁRIO]" : "[NÃO PRIORITARIO]";//verificando se o paciente é prioritario com "?" servindo como uma versão mais simples de "if"
+                System.out.println((i + 1) + ". " + p.getNome() + prioridade);//printando numero da fila e se é prioritario
 
-        }
+            }
         }
     }
 

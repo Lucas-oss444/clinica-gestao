@@ -5,7 +5,7 @@ import com.clinica.model.Paciente;
 import com.clinica.model.Profissional;
 import com.clinica.model.Sala;
 
-//agendamento é abstrato, pois ele serve como classe pai para a cobrança e procedimento e implementa os metodos da interface cobravel
+//agendamento é abstrato, pois ele serve como classe pai para a consulta e procedimento e implementa os metodos da interface cobravel
 public abstract class Agendamento implements Cobravel{
 
     //variaveis de agendamento
