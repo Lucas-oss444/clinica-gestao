@@ -3,6 +3,8 @@ package com.clinica;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.clinica.agendamento.Agendamento;
+import com.clinica.agendamento.AgendamentoService;
 import com.clinica.agendamento.Consulta;
 import com.clinica.agendamento.FilaEspera;
 import com.clinica.model.Paciente;
@@ -81,6 +83,17 @@ public class Main {
 
     Recibo recibo = new Recibo(consulta, consulta.calcularValor(), "29/05/2026");
 recibo.emitirRecibo();
+
+// Testando AgendamentoService
+List<Agendamento> agendamentos = new ArrayList<>();
+AgendamentoService service = new AgendamentoService(agendamentos);
+
+// primeiro agendamento - deve funcionar
+service.adicionarAgendamento(consulta);
+
+// segundo agendamento com mesmo profissional e horário - deve dar conflito
+Consulta consulta2 = new Consulta("29/05/2026", "08:00", pacientes.get(1), profissionais.get(0), salas.get(1), false);
+service.adicionarAgendamento(consulta2);
 
 
 
