@@ -124,7 +124,7 @@ mvn test
 | Lucas   | [@Lucas-oss444](https://github.com/Lucas-oss444) |
 | Gustavo | [@Galencar14](https://github.com/Galencar14)     |
 | Alycia  | [@Alycia-Clara](https://github.com/Alycia-Clara) |
-| Nome 4  | [@usuario4](https://github.com/usuario4)          |
+| Marcello| [@Marcello2007](https://github.com/Marcello2007) |
 
 ---
 
