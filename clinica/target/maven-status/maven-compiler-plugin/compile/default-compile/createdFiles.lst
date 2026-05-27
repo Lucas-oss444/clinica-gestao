@@ -1,0 +1,14 @@
+com\clinica\agendamento\Procedimento.class
+com\clinica\model\Profissional.class
+com\clinica\faturamento\RegraCobranca.class
+com\clinica\agendamento\AgendamentoService.class
+com\clinica\agendamento\Consulta.class
+com\clinica\model\Pessoa.class
+com\clinica\agendamento\Agendamento.class
+com\clinica\faturamento\Recibo.class
+com\clinica\Main.class
+com\clinica\model\Paciente.class
+com\clinica\relatorio\RelatorioClinica.class
+com\clinica\model\Sala.class
+com\clinica\agendamento\FilaEspera.class
+com\clinica\faturamento\Cobravel.class
