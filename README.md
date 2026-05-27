@@ -1,10 +1,10 @@
-# 🏥 Clínica Gestão — Sistema de Gestão de Clínica Multidisciplinar
+# Clínica Gestão — Sistema de Gestão de Clínica Multidisciplinar
 
 Sistema desenvolvido em Java para digitalizar os processos de uma clínica multidisciplinar, incluindo cadastro de pacientes e profissionais, agendamentos, faturamento e relatórios analíticos.
 
 ---
 
-## 📋 Funcionalidades
+## Funcionalidades
 
 - Cadastro de pacientes com histórico, convênio e prioridade
 - Cadastro de profissionais com especialidade, horários e valor de consulta
@@ -25,7 +25,7 @@ Sistema desenvolvido em Java para digitalizar os processos de uma clínica multi
 
 ---
 
-## 📐 Conceitos de POO Aplicados
+## Conceitos de POO Aplicados
 
 | Conceito | Onde é aplicado |
 |---|---|
@@ -38,10 +38,15 @@ Sistema desenvolvido em Java para digitalizar os processos de uma clínica multi
 
 ---
 
-## 📁 Estrutura do Projeto
+## Estrutura do Projeto
 
 ```
 clinica-gestao/
+├── dados/
+│   ├── pacientes.csv
+│   ├── profissionais.csv
+│   ├── salas.csv
+│   └── agendamentos.csv
 ├── src/
 │   ├── main/
 │   │   └── java/
@@ -54,10 +59,13 @@ clinica-gestao/
 │   │           ├── agendamento/
 │   │           │   ├── Agendamento.java
 │   │           │   ├── Consulta.java
-│   │           │   └── Procedimento.java
+│   │           │   ├── Procedimento.java
+│   │           │   ├── FilaEspera.java
+│   │           │   └── AgendamentoService.java
 │   │           ├── faturamento/
 │   │           │   ├── Cobravel.java
-│   │           │   └── Recibo.java
+│   │           │   ├── Recibo.java
+│   │           │   └── RegraCobranca.java
 │   │           ├── relatorio/
 │   │           │   └── RelatorioClinica.java
 │   │           ├── persistencia/
@@ -72,7 +80,7 @@ clinica-gestao/
 
 ---
 
-## ▶️ Como Executar
+## Como Executar
 
 ### Pré-requisitos
 
@@ -115,12 +123,12 @@ mvn test
 |---|---|
 | Lucas   | [@Lucas-oss444](https://github.com/Lucas-oss444) |
 | Gustavo | [@Galencar14](https://github.com/Galencar14)     |
-| Nome 3  | [@usuario3](https://github.com/usuario3)          |
+| Alycia  | [@Alycia-Clara](https://github.com/Alycia-Clara) |
 | Nome 4  | [@usuario4](https://github.com/usuario4)          |
 
 ---
 
-## 📅 Entrega
+## Entrega
 
 Projeto desenvolvido para a disciplina de **Programação Orientada a Objetos**.
 Data de apresentação: **29/05/2026**
