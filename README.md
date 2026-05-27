@@ -45,37 +45,38 @@ clinica-gestao/
 ├── dados/
 │   ├── pacientes.csv
 │   ├── profissionais.csv
-│   ├── salas.csv
-│   └── agendamentos.csv
-├── src/
-│   ├── main/
-│   │   └── java/
-│   │       └── com/clinica/
-│   │           ├── model/
-│   │           │   ├── Pessoa.java
-│   │           │   ├── Paciente.java
-│   │           │   ├── Profissional.java
-│   │           │   └── Sala.java
-│   │           ├── agendamento/
-│   │           │   ├── Agendamento.java
-│   │           │   ├── Consulta.java
-│   │           │   ├── Procedimento.java
-│   │           │   ├── FilaEspera.java
-│   │           │   └── AgendamentoService.java
-│   │           ├── faturamento/
-│   │           │   ├── Cobravel.java
-│   │           │   ├── Recibo.java
-│   │           │   └── RegraCobranca.java
-│   │           ├── relatorio/
-│   │           │   └── RelatorioClinica.java
-│   │           ├── persistencia/
-│   │           │   └── CsvHandler.java
-│   │           └── Main.java
-│   └── test/
-│       └── java/
-│           └── com/clinica/
-│               └── ClinicaTest.java
-└── pom.xml
+│   └── salas.csv
+├── clinica/
+│   ├── src/
+│   │   ├── main/
+│   │   │   └── java/
+│   │   │       └── com/clinica/
+│   │   │           ├── model/
+│   │   │           │   ├── Pessoa.java
+│   │   │           │   ├── Paciente.java
+│   │   │           │   ├── Profissional.java
+│   │   │           │   └── Sala.java
+│   │   │           ├── agendamento/
+│   │   │           │   ├── Agendamento.java
+│   │   │           │   ├── Consulta.java
+│   │   │           │   ├── Procedimento.java
+│   │   │           │   ├── FilaEspera.java
+│   │   │           │   └── AgendamentoService.java
+│   │   │           ├── faturamento/
+│   │   │           │   ├── Cobravel.java
+│   │   │           │   ├── Recibo.java
+│   │   │           │   └── RegraCobranca.java
+│   │   │           ├── relatorio/
+│   │   │           │   └── RelatorioClinica.java
+│   │   │           ├── persistencia/
+│   │   │           │   └── CsvHandler.java
+│   │   │           └── Main.java
+│   │   └── test/
+│   │       └── java/
+│   │           └── com/clinica/
+│   │               └── ClinicaTest.java
+│   └── pom.xml
+└── README.md
 ```
 
 ---
