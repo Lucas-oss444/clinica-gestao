@@ -1,60 +1,210 @@
 package com.clinica.agendamento;
 
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
-import com.clinica.model.Profissional;
-import com.clinica.model.Sala;
+import java.util.Map;
 
-//classe que vai gerenciar os conflitos de agendamento
+import com.clinica.faturamento.Recibo;
+import com.clinica.faturamento.RegraCobranca;
+import com.clinica.model.Paciente;
+
 public class AgendamentoService {
 
-    //criação de um ArrayList para armazenar os agendamentos
-    private List<Agendamento> agendamentos;
+    private static final int LIMITE_ATIVOS = 10;
 
-    //construtor de agendamento
-    public AgendamentoService(List<Agendamento> agendamentos) {
-            this.agendamentos = agendamentos;
+    private final List<Agendamento> agendamentos;
+    private final FilaEspera filaEspera;
+    private final RegraCobranca regraCobranca;
+
+    public AgendamentoService() {
+        this.agendamentos = new ArrayList<>();
+        this.filaEspera = new FilaEspera();
+        this.regraCobranca = new RegraCobranca(0.30, 0.50, 0.20);
     }
 
-    //metodo para verificar o conflito, o metodo é boolean, pois se ouver conflito retorna true, se não ouver conflito retorna false
-    //percorrendo o ArrayList de agendamentos ele verifica se a um conflito de um mesmo profissional na data e no horario indicados conforme o objeto dentro do vetor
-    //ele tambem verifica a ocupação de uma sala no mesmo horario e dia
-    //se ambas verificações anteriores forem falsas o sistema retorna como falso, logo o resultado desse metodo vai ser essencial para os outros metodos
-    public boolean verificarConflito(Profissional profissional, Sala sala, String data, String hora) {
-        for (Agendamento a : agendamentos) {
-            if (a.getData().equals(data) && a.getHora().equals(hora)) {
+    public String agendar(Agendamento novoAgendamento) {
+        if (contarAtivos() >= LIMITE_ATIVOS) {
+            filaEspera.adicionarPaciente(novoAgendamento.getPaciente());
+            return "Limite de 10 agendamentos ativos atingido. Paciente enviado para fila de espera.";
+        }
 
-                // verificação para mesmo profissional no mesmo horário
-                if (a.getProfissional().getNome().equalsIgnoreCase(profissional.getNome())) {
-                    System.out.println("Conflito: " + profissional.getNome() + " já tem agendamento às " + hora);
-                        return true;   
-                }
+        if (!novoAgendamento.getProfissional().estaDisponivel(novoAgendamento.getHora())) {
+            filaEspera.adicionarPaciente(novoAgendamento.getPaciente());
+            return "Horário não está na disponibilidade do profissional. Paciente enviado para fila de espera.";
+        }
 
-                // verificação mesma sala no mesmo horário
-                if (a.getSala().getNome().equalsIgnoreCase(sala.getNome())) {
-                    System.out.println("Conflito: " + sala.getNome() + " já está ocupada às " + hora);
-                        return true;
+        if (temConflito(novoAgendamento)) {
+            filaEspera.adicionarPaciente(novoAgendamento.getPaciente());
+            return "Conflito detectado (profissional ou sala já ocupados neste horário). Paciente enviado para fila de espera.";
+        }
+
+        agendamentos.add(novoAgendamento);
+        novoAgendamento.getProfissional().removerHorario(novoAgendamento.getHora());
+        return "Agendamento realizado com sucesso.";
+    }
+
+    public String cancelarAgendamento(int indice, boolean foraDoPrazo) {
+        if (indice < 0 || indice >= agendamentos.size()) {
+            return "Índice inválido.";
+        }
+
+        Agendamento agendamento = agendamentos.get(indice);
+        if (!"agendado".equalsIgnoreCase(agendamento.getStatus())) {
+            return "Somente agendamentos com status AGENDADO podem ser cancelados.";
+        }
+
+        agendamento.setStatus("cancelado");
+        agendamento.getProfissional().adicionarHorario(agendamento.getHora());
+
+        double taxa = 0.0;
+        if (foraDoPrazo) {
+            taxa = regraCobranca.calcularTaxaCancelamento(agendamento.calcularValor());
+        }
+
+        Paciente proximo = filaEspera.chamarProximo();
+        if (proximo != null) {
+            return "Agendamento cancelado. Taxa: R$ " + String.format("%.2f", taxa)
+                    + ". Horário liberado para fila de espera (próximo: " + proximo.getNome() + ").";
+        }
+
+        return "Agendamento cancelado. Taxa: R$ " + String.format("%.2f", taxa) + ".";
+    }
+
+    public Recibo finalizarAtendimento(int indice, String dataEmissao) {
+        if (indice < 0 || indice >= agendamentos.size()) {
+            return null;
+        }
+
+        Agendamento agendamento = agendamentos.get(indice);
+        if (!"agendado".equalsIgnoreCase(agendamento.getStatus())) {
+            return null;
+        }
+
+        agendamento.setStatus("finalizado");
+        double valorFinal = agendamento.calcularValor();
+        return new Recibo(agendamento, valorFinal, dataEmissao);
+    }
+
+    public boolean temConflito(Agendamento novoAgendamento) {
+        for (Agendamento atual : agendamentos) {
+            if (!"agendado".equalsIgnoreCase(atual.getStatus())) {
+                continue;
+            }
+
+            boolean mesmoDia = atual.getData().equalsIgnoreCase(novoAgendamento.getData());
+            boolean mesmaHora = atual.getHora().equalsIgnoreCase(novoAgendamento.getHora());
+
+            if (mesmoDia && mesmaHora) {
+                boolean mesmoProfissional = atual.getProfissional().getNome()
+                        .equalsIgnoreCase(novoAgendamento.getProfissional().getNome());
+                boolean mesmaSala = atual.getSala().getNumero() == novoAgendamento.getSala().getNumero();
+                if (mesmoProfissional || mesmaSala) {
+                    return true;
                 }
             }
         }
         return false;
     }
 
-    // Esse metodo é boolean, pois se ouver conflito o sistema gera uma mensagem de conflito e se não ouver conflito, o sistema registra o agendamento
-    //utilizando o metodo anterior de criar verificar conflito, o adicionarAgendamento vai adicionar o agendamento no ArrayList criada anteriormente caso o resultado do metodo de verificação de conflito seja false
-    public boolean adicionarAgendamento(Agendamento agendamento) {
-        boolean conflito = verificarConflito(agendamento.getProfissional(), agendamento.getSala(), agendamento.getData(), agendamento.getHora());
-        if (conflito) {
-            System.out.println("Agendamento não realizado por conflito de horário!");
-                return false;
-        }else {
-        agendamentos.add(agendamento);
-            System.out.println("Agendamento realizado com sucesso!");
-                return true;
+    public int contarAtivos() {
+        int total = 0;
+        for (Agendamento agendamento : agendamentos) {
+            if ("agendado".equalsIgnoreCase(agendamento.getStatus())) {
+                total++;
+            }
         }
+        return total;
     }
 
-    //getter do ArrayList agendamento
-    public List<Agendamento>getAgendamentos() {
+    public int contarCancelamentos() {
+        int total = 0;
+        for (Agendamento agendamento : agendamentos) {
+            if ("cancelado".equalsIgnoreCase(agendamento.getStatus())) {
+                total++;
+            }
+        }
+        return total;
+    }
+
+    public int contarRetornos() {
+        int total = 0;
+        for (Agendamento agendamento : agendamentos) {
+            if (agendamento instanceof Consulta consulta && consulta.isRetorno()) {
+                total++;
+            }
+        }
+        return total;
+    }
+
+    public int contarAtendimentosFinalizados() {
+        int total = 0;
+        for (Agendamento agendamento : agendamentos) {
+            if ("finalizado".equalsIgnoreCase(agendamento.getStatus())) {
+                total++;
+            }
+        }
+        return total;
+    }
+
+    public double calcularReceitaTotal() {
+        double total = 0.0;
+        for (Agendamento agendamento : agendamentos) {
+            if ("finalizado".equalsIgnoreCase(agendamento.getStatus())) {
+                total += agendamento.calcularValor();
+            }
+        }
+        return total;
+    }
+
+    public Map<String, Double> receitaPorEspecialidade() {
+        Map<String, Double> receita = new LinkedHashMap<>();
+        for (Agendamento agendamento : agendamentos) {
+            if ("finalizado".equalsIgnoreCase(agendamento.getStatus())) {
+                String especialidade = agendamento.getProfissional().getEspecialidade();
+                double valorAtual = receita.getOrDefault(especialidade, 0.0);
+                receita.put(especialidade, valorAtual + agendamento.calcularValor());
+            }
+        }
+        return receita;
+    }
+
+    public Map<String, Integer> atendimentosPorProfissional() {
+        Map<String, Integer> totalPorProfissional = new LinkedHashMap<>();
+        for (Agendamento agendamento : agendamentos) {
+            String nome = agendamento.getProfissional().getNome();
+            int atual = totalPorProfissional.getOrDefault(nome, 0);
+            totalPorProfissional.put(nome, atual + 1);
+        }
+        return totalPorProfissional;
+    }
+
+    public String profissionalMaisDemandado() {
+        String nomeMaisDemandado = "Sem dados";
+        int maior = 0;
+
+        for (Map.Entry<String, Integer> item : atendimentosPorProfissional().entrySet()) {
+            if (item.getValue() > maior) {
+                maior = item.getValue();
+                nomeMaisDemandado = item.getKey();
+            }
+        }
+        return nomeMaisDemandado;
+    }
+
+    public double taxaOcupacao() {
+        return (contarAtivos() * 100.0) / LIMITE_ATIVOS;
+    }
+
+    public int horariosOciosos() {
+        return LIMITE_ATIVOS - contarAtivos();
+    }
+
+    public List<Agendamento> getAgendamentos() {
         return agendamentos;
+    }
+
+    public FilaEspera getFilaEspera() {
+        return filaEspera;
     }
 }
