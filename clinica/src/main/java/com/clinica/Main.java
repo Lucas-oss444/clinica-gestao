@@ -2,7 +2,6 @@ package com.clinica;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Scanner;
 
 import com.clinica.agendamento.Agendamento;
@@ -13,6 +12,7 @@ import com.clinica.faturamento.Recibo;
 import com.clinica.model.Paciente;
 import com.clinica.model.Profissional;
 import com.clinica.model.Sala;
+import com.clinica.relatorio.RelatorioClinica;
 
 public class Main {
     public static void main(String[] args) {
@@ -331,24 +331,7 @@ public class Main {
     }
 
     private static void exibirRelatorio(AgendamentoService agendamentoService) {
-        System.out.println("\n  RELATÓRIO RESUMIDO    ");
-        System.out.println("Atendimentos finalizados: " + agendamentoService.contarAtendimentosFinalizados());
-        System.out.println("Receita total: R$ " + String.format("%.2f", agendamentoService.calcularReceitaTotal()));
-        System.out.println("Taxa de ocupação: " + String.format("%.2f", agendamentoService.taxaOcupacao()) + "%");
-        System.out.println("Horários ociosos (limite 10): " + agendamentoService.horariosOciosos());
-        System.out.println("Cancelamentos: " + agendamentoService.contarCancelamentos());
-        System.out.println("Retornos: " + agendamentoService.contarRetornos());
-        System.out.println("Profissional mais demandado: " + agendamentoService.profissionalMaisDemandado());
-
-        System.out.println("\nReceita por especialidade:");
-        Map<String, Double> receita = agendamentoService.receitaPorEspecialidade();
-        if (receita.isEmpty()) {
-            System.out.println("Sem dados.");
-            return;
-        }
-
-        for (Map.Entry<String, Double> item : receita.entrySet()) {
-            System.out.println("- " + item.getKey() + ": R$ " + String.format("%.2f", item.getValue()));
-        }
+        RelatorioClinica relatorio = new RelatorioClinica(agendamentoService);
+            relatorio.gerarRelatorioCompleto();
     }
 }
