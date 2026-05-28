@@ -29,13 +29,14 @@ public class Main {
         while (opcao != 0) {
             mostrarMenu();
             System.out.print("Escolha uma opção: ");
-            String entrada = scanner.nextLine();
-            try {
-                opcao = Integer.parseInt(entrada);
-            } catch (NumberFormatException e) {
-                System.out.println("Opção inválida.");
-                continue;
-            }
+
+            if (scanner.hasNextInt()) {
+            opcao = scanner.nextInt();
+            scanner.nextLine();
+            } else {
+            System.out.println("Opção inválida.");
+            scanner.nextLine();
+    }
 
             switch (opcao) {
                 case 1:
