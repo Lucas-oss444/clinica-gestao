@@ -12,6 +12,7 @@ import com.clinica.faturamento.Recibo;
 import com.clinica.model.Paciente;
 import com.clinica.model.Profissional;
 import com.clinica.model.Sala;
+import com.clinica.persistencia.CsvHandler;
 import com.clinica.relatorio.RelatorioClinica;
 
 public class Main {
@@ -21,7 +22,14 @@ public class Main {
         List<Sala> salas = new ArrayList<>();
         AgendamentoService agendamentoService = new AgendamentoService();
 
-        carregarDadosIniciais(pacientes, profissionais, salas);
+       CsvHandler csv = new CsvHandler();
+        pacientes = csv.carregarPacientes();
+        profissionais = csv.carregarProfissionais();
+        salas = csv.carregarSalas();
+
+if (pacientes.isEmpty() || profissionais.isEmpty() || salas.isEmpty()) {
+    carregarDadosIniciais(pacientes, profissionais, salas);
+}
 
         Scanner scanner = new Scanner(System.in);
         int opcao = -1;
@@ -75,6 +83,11 @@ public class Main {
                     break;
             }
         }
+
+        csv.salvarPacientes(pacientes);
+        csv.salvarProfissionais(profissionais);
+        csv.salvarSalas(salas);
+        System.out.println("Dados salvos com sucesso!");
 
         scanner.close();
     }
