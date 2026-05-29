@@ -22,7 +22,7 @@ public class Main {
         List<Sala> salas = new ArrayList<>();
         AgendamentoService agendamentoService = new AgendamentoService();
 
-       CsvHandler csv = new CsvHandler();
+        CsvHandler csv = new CsvHandler();
         pacientes = csv.carregarPacientes();
         profissionais = csv.carregarProfissionais();
         salas = csv.carregarSalas();

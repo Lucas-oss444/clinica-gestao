@@ -1,14 +1,15 @@
-C:\Users\Lucas\Documents\Projeto clinica\clinica\src\main\java\com\clinica\agendamento\Agendamento.java
-C:\Users\Lucas\Documents\Projeto clinica\clinica\src\main\java\com\clinica\agendamento\AgendamentoService.java
-C:\Users\Lucas\Documents\Projeto clinica\clinica\src\main\java\com\clinica\agendamento\Consulta.java
-C:\Users\Lucas\Documents\Projeto clinica\clinica\src\main\java\com\clinica\agendamento\FilaEspera.java
-C:\Users\Lucas\Documents\Projeto clinica\clinica\src\main\java\com\clinica\agendamento\Procedimento.java
-C:\Users\Lucas\Documents\Projeto clinica\clinica\src\main\java\com\clinica\faturamento\Cobravel.java
-C:\Users\Lucas\Documents\Projeto clinica\clinica\src\main\java\com\clinica\faturamento\Recibo.java
-C:\Users\Lucas\Documents\Projeto clinica\clinica\src\main\java\com\clinica\faturamento\RegraCobranca.java
-C:\Users\Lucas\Documents\Projeto clinica\clinica\src\main\java\com\clinica\Main.java
-C:\Users\Lucas\Documents\Projeto clinica\clinica\src\main\java\com\clinica\model\Paciente.java
-C:\Users\Lucas\Documents\Projeto clinica\clinica\src\main\java\com\clinica\model\Pessoa.java
-C:\Users\Lucas\Documents\Projeto clinica\clinica\src\main\java\com\clinica\model\Profissional.java
-C:\Users\Lucas\Documents\Projeto clinica\clinica\src\main\java\com\clinica\model\Sala.java
-C:\Users\Lucas\Documents\Projeto clinica\clinica\src\main\java\com\clinica\relatorio\RelatorioClinica.java
+C:\Users\gusta\Downloads\clinica-gestao-main\clinica-gestao-main\clinica\clinica-gestao\clinica\src\main\java\com\clinica\agendamento\Agendamento.java
+C:\Users\gusta\Downloads\clinica-gestao-main\clinica-gestao-main\clinica\clinica-gestao\clinica\src\main\java\com\clinica\agendamento\AgendamentoService.java
+C:\Users\gusta\Downloads\clinica-gestao-main\clinica-gestao-main\clinica\clinica-gestao\clinica\src\main\java\com\clinica\agendamento\Consulta.java
+C:\Users\gusta\Downloads\clinica-gestao-main\clinica-gestao-main\clinica\clinica-gestao\clinica\src\main\java\com\clinica\agendamento\FilaEspera.java
+C:\Users\gusta\Downloads\clinica-gestao-main\clinica-gestao-main\clinica\clinica-gestao\clinica\src\main\java\com\clinica\agendamento\Procedimento.java
+C:\Users\gusta\Downloads\clinica-gestao-main\clinica-gestao-main\clinica\clinica-gestao\clinica\src\main\java\com\clinica\faturamento\Cobravel.java
+C:\Users\gusta\Downloads\clinica-gestao-main\clinica-gestao-main\clinica\clinica-gestao\clinica\src\main\java\com\clinica\faturamento\Recibo.java
+C:\Users\gusta\Downloads\clinica-gestao-main\clinica-gestao-main\clinica\clinica-gestao\clinica\src\main\java\com\clinica\faturamento\RegraCobranca.java
+C:\Users\gusta\Downloads\clinica-gestao-main\clinica-gestao-main\clinica\clinica-gestao\clinica\src\main\java\com\clinica\Main.java
+C:\Users\gusta\Downloads\clinica-gestao-main\clinica-gestao-main\clinica\clinica-gestao\clinica\src\main\java\com\clinica\model\Paciente.java
+C:\Users\gusta\Downloads\clinica-gestao-main\clinica-gestao-main\clinica\clinica-gestao\clinica\src\main\java\com\clinica\model\Pessoa.java
+C:\Users\gusta\Downloads\clinica-gestao-main\clinica-gestao-main\clinica\clinica-gestao\clinica\src\main\java\com\clinica\model\Profissional.java
+C:\Users\gusta\Downloads\clinica-gestao-main\clinica-gestao-main\clinica\clinica-gestao\clinica\src\main\java\com\clinica\model\Sala.java
+C:\Users\gusta\Downloads\clinica-gestao-main\clinica-gestao-main\clinica\clinica-gestao\clinica\src\main\java\com\clinica\persistencia\CsvHandler.java
+C:\Users\gusta\Downloads\clinica-gestao-main\clinica-gestao-main\clinica\clinica-gestao\clinica\src\main\java\com\clinica\relatorio\RelatorioClinica.java

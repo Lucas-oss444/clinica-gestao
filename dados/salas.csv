@@ -1,2 +1,10 @@
+1,sala de cardiologia,false
+2,sala de pediatria,true
+3,sala de ortopedia,false
+4,sala de neurologia,true
+5,sala de dermatologia,false
+6,sala de ginecologia,true
 7,sala de cirurgia,false
 8,sala de oftalmologia,true
+9,sala de psiquiatria,false
+10,sala de exames,true

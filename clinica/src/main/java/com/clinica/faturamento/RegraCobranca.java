@@ -18,7 +18,7 @@ public class RegraCobranca {
     public double aplicarDescontoConvenio(double valor) {
         return valor * (1 - descontoConvenio);
     }
-     public double aplicarDescontoRetorno(double valor) {
+    public double aplicarDescontoRetorno(double valor) {
         return valor * (1 - descontoRetorno);
     }
 

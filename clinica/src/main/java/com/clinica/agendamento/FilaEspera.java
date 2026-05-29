@@ -52,7 +52,7 @@ public class FilaEspera {
         }
     }
 
-    //getters para saber o tamanho da fila 
+    //getters para saber o tamanho da fila
     public int getTamanho() {
         return fila.size();
     }
