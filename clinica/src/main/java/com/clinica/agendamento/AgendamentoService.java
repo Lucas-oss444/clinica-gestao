@@ -11,7 +11,7 @@ import com.clinica.model.Paciente;
 
 public class AgendamentoService {
 
-    private static final int LIMITE_ATIVOS = 10;
+    private static final int LIMITE_ATIVOS = 2;
 
     private final List<Agendamento> agendamentos;
     private final FilaEspera filaEspera;
@@ -41,6 +41,7 @@ public class AgendamentoService {
 
         agendamentos.add(novoAgendamento);
         novoAgendamento.getProfissional().removerHorario(novoAgendamento.getHora());
+        filaEspera.removerPaciente(novoAgendamento.getPaciente());
         return "Agendamento realizado com sucesso.";
     }
 
