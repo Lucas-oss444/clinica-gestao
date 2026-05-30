@@ -11,7 +11,7 @@ import com.clinica.model.Paciente;
 
 public class AgendamentoService {
 
-    private static final int LIMITE_ATIVOS = 10;
+    private static final int LIMITE_ATIVOS = 2;
 
     private final List<Agendamento> agendamentos;
     private final FilaEspera filaEspera;
@@ -41,6 +41,7 @@ public class AgendamentoService {
 
         agendamentos.add(novoAgendamento);
         novoAgendamento.getProfissional().removerHorario(novoAgendamento.getHora());
+        filaEspera.removerPaciente(novoAgendamento.getPaciente());
         return "Agendamento realizado com sucesso.";
     }
 
@@ -72,19 +73,20 @@ public class AgendamentoService {
     }
 
     public Recibo finalizarAtendimento(int indice, String dataEmissao) {
-        if (indice < 0 || indice >= agendamentos.size()) {
-            return null;
-        }
-
-        Agendamento agendamento = agendamentos.get(indice);
-        if (!"agendado".equalsIgnoreCase(agendamento.getStatus())) {
-            return null;
-        }
-
-        agendamento.setStatus("finalizado");
-        double valorFinal = agendamento.calcularValor();
-        return new Recibo(agendamento, valorFinal, dataEmissao);
+    if (indice < 0 || indice >= agendamentos.size()) {
+        return null;
     }
+
+    Agendamento agendamento = agendamentos.get(indice);
+    if (!"agendado".equalsIgnoreCase(agendamento.getStatus())) {
+        return null;
+    }
+
+    agendamento.setStatus("finalizado");
+    agendamento.getProfissional().adicionarHorario(agendamento.getHora()); // ← devolve o horário
+    double valorFinal = agendamento.calcularValor();
+    return new Recibo(agendamento, valorFinal, dataEmissao);
+}
 
     public boolean temConflito(Agendamento novoAgendamento) {
         for (Agendamento atual : agendamentos) {

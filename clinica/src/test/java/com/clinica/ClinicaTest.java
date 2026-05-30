@@ -105,8 +105,8 @@ public class ClinicaTest {
     }
 
     // testa se agendamento com conflito e rejeitado
-   @Test
-public void testAgendamentoComConflito() {
+    @Test
+    public void testAgendamentoComConflito() {
     service.agendar(consulta); // agenda e remove 08:00 do prof1
     
     // adiciona o horário de volta para simular outro agendamento

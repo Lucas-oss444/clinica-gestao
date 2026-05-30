@@ -22,14 +22,14 @@ public class Main {
         List<Sala> salas = new ArrayList<>();
         AgendamentoService agendamentoService = new AgendamentoService();
 
-       CsvHandler csv = new CsvHandler();
+        CsvHandler csv = new CsvHandler();
         pacientes = csv.carregarPacientes();
         profissionais = csv.carregarProfissionais();
         salas = csv.carregarSalas();
 
-if (pacientes.isEmpty() || profissionais.isEmpty() || salas.isEmpty()) {
-    carregarDadosIniciais(pacientes, profissionais, salas);
-}
+        if (pacientes.isEmpty() || profissionais.isEmpty() || salas.isEmpty()) {
+            carregarDadosIniciais(pacientes, profissionais, salas);
+        }
 
         Scanner scanner = new Scanner(System.in);
         int opcao = -1;
@@ -39,12 +39,12 @@ if (pacientes.isEmpty() || profissionais.isEmpty() || salas.isEmpty()) {
             System.out.print("Escolha uma opção: ");
 
             if (scanner.hasNextInt()) {
-            opcao = scanner.nextInt();
-            scanner.nextLine();
+                opcao = scanner.nextInt();
+                scanner.nextLine();
             } else {
-            System.out.println("Opção inválida.");
-            scanner.nextLine();
-    }
+                System.out.println("Opção inválida.");
+                scanner.nextLine();
+            }
 
             switch (opcao) {
                 case 1:
@@ -128,8 +128,7 @@ if (pacientes.isEmpty() || profissionais.isEmpty() || salas.isEmpty()) {
     private static void cadastrarPaciente(Scanner scanner, List<Paciente> pacientes) {
         System.out.print("Nome: ");
         String nome = scanner.nextLine();
-        System.out.print("Idade: ");
-        int idade = Integer.parseInt(scanner.nextLine());
+        int idade = lerInteiro(scanner, "Idade: ");
         System.out.print("CPF/código: ");
         String cpf = scanner.nextLine();
         System.out.print("Contato: ");
@@ -148,18 +147,14 @@ if (pacientes.isEmpty() || profissionais.isEmpty() || salas.isEmpty()) {
     private static void cadastrarProfissional(Scanner scanner, List<Profissional> profissionais) {
         System.out.print("Nome: ");
         String nome = scanner.nextLine();
-        System.out.print("Idade: ");
-        int idade = Integer.parseInt(scanner.nextLine());
+        int idade = lerInteiro(scanner, "Idade: ");
         System.out.print("Especialidade: ");
         String especialidade = scanner.nextLine();
-        System.out.print("Valor da consulta: ");
-        double valor = Double.parseDouble(scanner.nextLine());
-        System.out.print("Duração padrão (minutos): ");
-        int duracao = Integer.parseInt(scanner.nextLine());
+        double valor = lerDouble(scanner, "Valor da consulta: ");
+        int duracao = lerInteiro(scanner, "Duração padrão (minutos): ");
 
         Profissional profissional = new Profissional(nome, idade, especialidade, valor, duracao);
-        System.out.print("Quantos horários disponíveis deseja cadastrar agora? ");
-        int qtdHorarios = Integer.parseInt(scanner.nextLine());
+        int qtdHorarios = lerInteiro(scanner, "Quantos horários disponíveis deseja cadastrar agora? ");
 
         for (int i = 0; i < qtdHorarios; i++) {
             System.out.print("Horário " + (i + 1) + " (ex: 08:00): ");
@@ -184,7 +179,6 @@ if (pacientes.isEmpty() || profissionais.isEmpty() || salas.isEmpty()) {
 
         Paciente paciente = escolherPaciente(scanner, pacientes);
         Profissional profissional = escolherProfissional(scanner, profissionais);
-
         Sala sala = escolherSala(scanner, salas);
 
         if (paciente == null || profissional == null || sala == null) {
@@ -231,17 +225,10 @@ if (pacientes.isEmpty() || profissionais.isEmpty() || salas.isEmpty()) {
         String hora = scanner.nextLine();
         System.out.print("Tipo do procedimento: ");
         String tipoProcedimento = scanner.nextLine();
-        System.out.print("Valor do procedimento: ");
-        double valorProcedimento = Double.parseDouble(scanner.nextLine());
+        double valorProcedimento = lerDouble(scanner, "Valor do procedimento: ");
 
         Procedimento procedimento = new Procedimento(
-                data,
-                hora,
-                paciente,
-                profissional,
-                sala,
-                tipoProcedimento,
-                valorProcedimento);
+                data, hora, paciente, profissional, sala, tipoProcedimento, valorProcedimento);
 
         String resposta = agendamentoService.agendar(procedimento);
         System.out.println(resposta);
@@ -251,10 +238,9 @@ if (pacientes.isEmpty() || profissionais.isEmpty() || salas.isEmpty()) {
         System.out.println("\nPacientes:");
         for (int i = 0; i < pacientes.size(); i++) {
             Paciente paciente = pacientes.get(i);
-            System.out.println(i + "  " + paciente.getNome() + "  " + paciente.getCpf() + " ");
+            System.out.println(i + "  " + paciente.getNome() + "  " + paciente.getCpf());
         }
-        System.out.print("Escolha o índice do paciente: ");
-        int indice = Integer.parseInt(scanner.nextLine());
+        int indice = lerInteiro(scanner, "Escolha o índice do paciente: ");
         if (indice < 0 || indice >= pacientes.size()) {
             return null;
         }
@@ -268,8 +254,7 @@ if (pacientes.isEmpty() || profissionais.isEmpty() || salas.isEmpty()) {
             System.out.println(i + " - " + profissional.getNome() + " / " + profissional.getEspecialidade()
                     + " / horários: " + profissional.getHorariosDisponiveis());
         }
-        System.out.print("Escolha o índice do profissional: ");
-        int indice = Integer.parseInt(scanner.nextLine());
+        int indice = lerInteiro(scanner, "Escolha o índice do profissional: ");
         if (indice < 0 || indice >= profissionais.size()) {
             return null;
         }
@@ -282,8 +267,7 @@ if (pacientes.isEmpty() || profissionais.isEmpty() || salas.isEmpty()) {
             Sala sala = salas.get(i);
             System.out.println(i + " - " + sala.getNome() + " (número " + sala.getNumero() + ")");
         }
-        System.out.print("Escolha o índice da sala: ");
-        int indice = Integer.parseInt(scanner.nextLine());
+        int indice = lerInteiro(scanner, "Escolha o índice da sala: ");
         if (indice < 0 || indice >= salas.size()) {
             return null;
         }
@@ -315,9 +299,8 @@ if (pacientes.isEmpty() || profissionais.isEmpty() || salas.isEmpty()) {
             return;
         }
 
-        System.out.print("Digite o índice para cancelar: ");
-        int indice = Integer.parseInt(scanner.nextLine());
-        System.out.print("Cancelamento está dentro ou fora do prazo? (s/n): ");
+        int indice = lerInteiro(scanner, "Digite o índice para cancelar: ");
+        System.out.print("Cancelamento está fora do prazo? (s/n): ");
         boolean foraDoPrazo = scanner.nextLine().trim().equalsIgnoreCase("s");
 
         String resposta = agendamentoService.cancelarAgendamento(indice, foraDoPrazo);
@@ -330,14 +313,13 @@ if (pacientes.isEmpty() || profissionais.isEmpty() || salas.isEmpty()) {
             return;
         }
 
-        System.out.print("Digite o índice para finalizar: ");
-        int indice = Integer.parseInt(scanner.nextLine());
+        int indice = lerInteiro(scanner, "Digite o índice para finalizar: ");
         System.out.print("Data de emissão do recibo: ");
         String dataEmissao = scanner.nextLine();
 
         Recibo recibo = agendamentoService.finalizarAtendimento(indice, dataEmissao);
         if (recibo == null) {
-            System.out.println("Não foi possível finalizar ");
+            System.out.println("Não foi possível finalizar.");
             return;
         }
         recibo.emitirRecibo();
@@ -345,6 +327,28 @@ if (pacientes.isEmpty() || profissionais.isEmpty() || salas.isEmpty()) {
 
     private static void exibirRelatorio(AgendamentoService agendamentoService) {
         RelatorioClinica relatorio = new RelatorioClinica(agendamentoService);
-            relatorio.gerarRelatorioCompleto();
+        relatorio.gerarRelatorioCompleto();
+    }
+
+    private static int lerInteiro(Scanner scanner, String mensagem) {
+        while (true) {
+            System.out.print(mensagem);
+            try {
+                return Integer.parseInt(scanner.nextLine());
+            } catch (NumberFormatException e) {
+                System.out.println("Valor inválido! Digite apenas números inteiros.");
+            }
+        }
+    }
+
+    private static double lerDouble(Scanner scanner, String mensagem) {
+        while (true) {
+            System.out.print(mensagem);
+            try {
+                return Double.parseDouble(scanner.nextLine());
+            } catch (NumberFormatException e) {
+                System.out.println("Valor inválido! Digite apenas números.");
+            }
+        }
     }
 }

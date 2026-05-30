@@ -21,8 +21,8 @@ public class CsvHandler {
         try (PrintWriter writer = new PrintWriter(new FileWriter(PACIENTES_CSV))) {
             for (Paciente p : pacientes) {
                 writer.println(p.getNome() + "," + p.getIdade() + "," + p.getCpf() + "," +
-                               p.getContato() + "," + p.getConvenio() + "," +
-                               p.getHistorico() + "," + p.isPrioridade());
+                                p.getContato() + "," + p.getConvenio() + "," +
+                                p.getHistorico() + "," + p.isPrioridade());
             }
             System.out.println("Pacientes salvos!");
         } catch (IOException e) {
@@ -53,9 +53,9 @@ public class CsvHandler {
         try (PrintWriter writer = new PrintWriter(new FileWriter(PROFISSIONAIS_CSV))) {
             for (Profissional prof : profissionais) {
                 writer.println(prof.getNome() + "," + prof.getIdade() + "," +
-                               prof.getEspecialidade() + "," + prof.getValorConsulta() + "," +
-                               prof.getDuracaoAtendimentos() + "," +
-                               String.join(";", prof.getHorariosDisponiveis()));
+                                prof.getEspecialidade() + "," + prof.getValorConsulta() + "," +
+                                prof.getDuracaoAtendimentos() + "," +
+                                String.join(";", prof.getHorariosDisponiveis()));
             }
             System.out.println("Profissionais salvos!");
         } catch (IOException e) {

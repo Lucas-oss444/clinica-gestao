@@ -18,7 +18,7 @@ public class Consulta extends Agendamento {
     }
 
     //função de calcular valor com a implementação de regraCobranca para variar os valores das multas
-     @Override
+    @Override
     public double calcularValor() {
         
         RegraCobranca regra = new RegraCobranca(0.30, 0.50, 0.20);

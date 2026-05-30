@@ -19,8 +19,6 @@ public class Profissional extends Pessoa{
         this.valorConsulta = valorConsulta;
         this.duracaoAtendimentos = duracaoAtendimentos;
         this.horariosDisponiveis = new ArrayList<>();
-            
-      
     }
 
     //getters e setters de profissional
@@ -66,12 +64,4 @@ public class Profissional extends Pessoa{
     public boolean estaDisponivel(String horario) {
         return horariosDisponiveis.contains(horario);
     }
-
-
-
-    
-
-    
-    
-
 }

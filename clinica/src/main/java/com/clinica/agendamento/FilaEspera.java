@@ -13,6 +13,10 @@ public class FilaEspera {
     public FilaEspera() {
         this.fila = new ArrayList<>();
     }
+    // adicione após o método exibirFila()
+    public void removerPaciente(Paciente paciente) {
+    fila.removeIf(p -> p.getNome().equalsIgnoreCase(paciente.getNome()));
+}
 
     //função para adicionar paciente na fila e verificar se é prioritario
     public void adicionarPaciente(Paciente paciente) {
@@ -21,7 +25,7 @@ public class FilaEspera {
         } else {
             fila.add(paciente);// normal vai para o final da fila
         }
-         System.out.println(paciente.getNome() + " adicionado à fila de espera.");
+        System.out.println(paciente.getNome() + " adicionado à fila de espera.");
     }
 
     //metodo para retornar o objeto paciente
@@ -52,7 +56,7 @@ public class FilaEspera {
         }
     }
 
-    //getters para saber o tamanho da fila 
+    //getters para saber o tamanho da fila
     public int getTamanho() {
         return fila.size();
     }

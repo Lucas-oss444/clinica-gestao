@@ -1,4 +1,5 @@
 com\clinica\agendamento\Procedimento.class
+com\clinica\persistencia\CsvHandler.class
 com\clinica\model\Profissional.class
 com\clinica\faturamento\RegraCobranca.class
 com\clinica\agendamento\AgendamentoService.class
