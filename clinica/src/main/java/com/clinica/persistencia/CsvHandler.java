@@ -10,11 +10,13 @@ import java.util.List;
 
 public class CsvHandler {
 
+    //caminho para a pasta que vai armazenar os dados
     private static final String PASTA = "dados/";
     private static final String PACIENTES_CSV = PASTA + "pacientes.csv";
     private static final String PROFISSIONAIS_CSV = PASTA + "profissionais.csv";
     private static final String SALAS_CSV = PASTA + "salas.csv";
 
+    //metodo par asalvar os pacientes no csv
     public void salvarPacientes(List<Paciente> pacientes) {
         try (PrintWriter writer = new PrintWriter(new FileWriter(PACIENTES_CSV))) {
             for (Paciente p : pacientes) {
@@ -28,6 +30,7 @@ public class CsvHandler {
         }
     }
 
+    //metodo para carregar os pacientes do csv
     public List<Paciente> carregarPacientes() {
         List<Paciente> pacientes = new ArrayList<>();
         File arquivo = new File(PACIENTES_CSV);
@@ -45,6 +48,7 @@ public class CsvHandler {
         return pacientes;
     }
 
+    //metodo para carregar profissionais no csv
     public void salvarProfissionais(List<Profissional> profissionais) {
         try (PrintWriter writer = new PrintWriter(new FileWriter(PROFISSIONAIS_CSV))) {
             for (Profissional prof : profissionais) {
@@ -59,6 +63,7 @@ public class CsvHandler {
         }
     }
 
+    //metodo para carregar profissionais do csv
     public List<Profissional> carregarProfissionais() {
         List<Profissional> profissionais = new ArrayList<>();
         File arquivo = new File(PROFISSIONAIS_CSV);
@@ -82,6 +87,7 @@ public class CsvHandler {
         return profissionais;
     }
 
+    //metodo para carregar as salas no csv
     public void salvarSalas(List<Sala> salas) {
         try (PrintWriter writer = new PrintWriter(new FileWriter(SALAS_CSV))) {
             for (Sala s : salas) {
@@ -93,6 +99,7 @@ public class CsvHandler {
         }
     }
 
+    //metodos para carregar as salas do csv
     public List<Sala> carregarSalas() {
         List<Sala> salas = new ArrayList<>();
         File arquivo = new File(SALAS_CSV);
