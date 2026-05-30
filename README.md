@@ -16,7 +16,7 @@ Sistema desenvolvido em Java para digitalizar os processos de uma clínica multi
 
 ---
 
-## 🛠️ Tecnologias Utilizadas
+## Tecnologias Utilizadas
 
 - **Java 17+**
 - **Maven** — gerenciamento de dependências
@@ -99,7 +99,7 @@ cd clinica-gestao
 
 1. Abra a pasta do projeto no VS Code
 2. Abra o arquivo `Main.java`
-3. Clique no botão **Run ▶️** no canto superior direito
+3. Clique no botão **Run** no canto superior direito
 
 ### Executando pelo terminal com Maven
 
@@ -110,7 +110,7 @@ mvn exec:java -Dexec.mainClass="com.clinica.Main"
 
 ---
 
-## 🧪 Executando os Testes
+## Executando os Testes
 
 ```bash
 mvn test
@@ -118,7 +118,7 @@ mvn test
 
 ---
 
-## 👥 Integrantes do Grupo
+## Integrantes do Grupo
 
 | Nome | GitHub |
 |---|---|
